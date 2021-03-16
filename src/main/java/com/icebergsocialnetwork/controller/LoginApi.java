@@ -41,4 +41,8 @@ public class LoginApi {
     public ResponseEntity<String> hello(){
         return new ResponseEntity<>("HEllo", HttpStatus.OK);
     }
+    @GetMapping("/admin")
+    public ResponseEntity<String> admin(){
+        return new ResponseEntity<>("admin", HttpStatus.OK);
+    }
 }
