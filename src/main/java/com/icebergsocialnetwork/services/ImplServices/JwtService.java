@@ -14,7 +14,7 @@ import java.util.Date;
 @Service
 public class JwtService {
     private static final String SECRET_KEY = "123456789";
-    private static final long EXPIRE_KEY = 123456789l;
+    private static final long EXPIRE_KEY = 123456789L;
     public static final Logger logger = LoggerFactory.getLogger(JwtService.class.getName());
 
     public String generateAccessToken(Authentication authentication) {
@@ -45,10 +45,9 @@ public class JwtService {
     }
 
     public String getUserNameFromJwtToken(String token) {
-        String userName = Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody().getSubject();
-        return userName;
     }
 }
