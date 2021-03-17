@@ -3,6 +3,7 @@ package com.icebergsocialnetwork.controller;
 import com.icebergsocialnetwork.model.user.JwtResponse;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.services.ImplServices.JwtService;
+import com.icebergsocialnetwork.services.InterfaceService.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,8 @@ public class LoginApi {
 
     @Autowired
     private JwtService jwtService;
-
+    @Autowired
+    IUserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
@@ -38,8 +40,8 @@ public class LoginApi {
     }
 
     @GetMapping("/hello")
-    public ResponseEntity<String> hello(){
-        return new ResponseEntity<>("HEllo", HttpStatus.OK);
+    public ResponseEntity<?> hello(){
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/admin")
     public ResponseEntity<String> admin(){
