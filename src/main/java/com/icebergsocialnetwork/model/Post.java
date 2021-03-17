@@ -8,27 +8,27 @@ import java.util.Date;
 @Entity
 public class Post {
     @Id
-    private String postId;
-    private String userId;
+    private Long postId;
+    private Long userId;
     private Date createDate;
     private String protective;
 
     public Post() {
     }
 
-    public String getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
