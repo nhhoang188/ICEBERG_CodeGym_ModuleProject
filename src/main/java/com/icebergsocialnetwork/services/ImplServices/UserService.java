@@ -45,8 +45,8 @@ public class UserService implements IUserService {
     @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getRoles() != null) {
-            Role role = roleService.findByName("ROLE_MEMBER");
+        if (user.getRoles() == null) {
+            Role role = roleService.findByName("ROLE_USER");
             Set<Role> roles = new HashSet<>();
             roles.add(role);
             user.setRoles(roles);
@@ -80,7 +80,7 @@ public class UserService implements IUserService {
         boolean isRegister = false;
         Iterable<User> users = this.findAll();
         for (User currentUser : users) {
-            if (user.getUsername().equals(currentUser.getUsername())) {
+            if (user.getUsername().equals(currentUser.getUsername()) || user.getEmail().equals(currentUser.getEmail())) {
                 isRegister = true;
                 break;
             }
