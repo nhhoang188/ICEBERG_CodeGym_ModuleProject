@@ -1,6 +1,8 @@
-package com.icebergsocialnetwork.model;
+package com.icebergsocialnetwork.model.post;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -8,12 +10,30 @@ import java.util.Date;
 @Entity
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     private Long userId;
     private Date createDate;
-    private String protective;
+    private String privacy;
+    private String content;
 
     public Post() {
+    }
+
+    public String getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(String privacy) {
+        this.privacy = privacy;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getPostId() {
@@ -40,11 +60,4 @@ public class Post {
         this.createDate = createDate;
     }
 
-    public String getProtective() {
-        return protective;
-    }
-
-    public void setProtective(String protective) {
-        this.protective = protective;
-    }
 }
