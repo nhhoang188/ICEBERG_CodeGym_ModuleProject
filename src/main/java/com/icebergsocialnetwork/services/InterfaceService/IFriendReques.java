@@ -9,4 +9,5 @@ public interface IFriendReques  {
     public Iterable<FriendRequest> findAll();
     public FriendRequest save(FriendRequest friendRequest);
     public Optional<FriendRequest> findById(Long id);
+    public void deleteById(Long id);
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/friendRequess")
+@RequestMapping("/friendrequests")
 public class FriendRequestController {
     @Autowired
     private IFriendReques iFriendReques;
@@ -18,25 +18,20 @@ public class FriendRequestController {
     public Iterable<FriendRequest> getAll(){
         return iFriendReques.findAll();
     }
+
     @PostMapping
     public void create(@RequestBody FriendRequest friendRequest){
         friendRequest.setStt(false);
         iFriendReques.save(friendRequest);
     }
-    @DeleteMapping
-    public void delete(@RequestBody FriendRequest friendRequest){
-        iFriendReques.delete(friendRequest);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        iFriendReques.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    public void acceptFriend(@PathVariable Long id){
-        Optional<FriendRequest> check=iFriendReques.findById(id);
-        FriendRequest friendRequest=new FriendRequest();
-        if(check.isPresent()){
-            friendRequest= check.get();
-            friendRequest.setStt(true);
-            iFriendReques.save(friendRequest);
-        }
+    public void acceptFriend(@PathVariable Long id,@RequestBody FriendRequest friendRequest){
+        iFriendReques.save(friendRequest);
     }
 
 }

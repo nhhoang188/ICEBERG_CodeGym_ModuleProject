@@ -30,11 +30,11 @@ public class FriendRequestService implements IFriendReques {
     public FriendRequest save(FriendRequest friendRequest) {
         return friendRequestRepository.save(friendRequest);
     }
-//
-//    @Override
-//    public void deleteById(Long id) {
-//        friendRequestRepository.deleteById(id);
-//    }
+
+    @Override
+    public void deleteById(Long id) {
+        friendRequestRepository.deleteById(id);
+    }
 
     @Override
     public void delete(FriendRequest friendRequest) {
