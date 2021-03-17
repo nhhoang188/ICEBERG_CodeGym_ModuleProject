@@ -1,5 +1,6 @@
 package com.icebergsocialnetwork.services.ImplServices;
 
+import com.icebergsocialnetwork.model.user.Role;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.model.user.UserPrinciple;
 import com.icebergsocialnetwork.repository.user.UserRepository;
@@ -12,6 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Service
@@ -41,6 +45,12 @@ public class UserService implements IUserService {
     @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getRoles() != null) {
+            Role role = roleService.findByName("ROLE_MEMBER");
+            Set<Role> roles = new HashSet<>();
+            roles.add(role);
+            user.setRoles(roles);
+        }
         return userRepository.save(user);
     }
 
@@ -58,5 +68,28 @@ public class UserService implements IUserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public boolean checkLogin(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean isRegister(User user) {
+        boolean isRegister = false;
+        Iterable<User> users = this.findAll();
+        for (User currentUser : users) {
+            if (user.getUsername().equals(currentUser.getUsername())) {
+                isRegister = true;
+                break;
+            }
+        }
+        return isRegister;
+    }
+
+    @Override
+    public boolean isCorrectConfirmPassword(User user) {
+        return false;
     }
 }
