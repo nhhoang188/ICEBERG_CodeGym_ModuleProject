@@ -17,6 +17,14 @@ public class Post {
     private String privacy;
     private String content;
 
+    public Post(Long postId, Long userId, Date createDate, String privacy, String content) {
+        this.postId = postId;
+        this.userId = userId;
+        this.createDate = createDate;
+        this.privacy = privacy;
+        this.content = content;
+    }
+
     public Post() {
     }
 

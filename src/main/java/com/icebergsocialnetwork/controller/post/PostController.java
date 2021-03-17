@@ -15,7 +15,7 @@ public class PostController {
     private PostServiceImpl postService;
 
     //region api status post
-    @PostMapping("")
+    @PostMapping
     @ResponseBody
     public ResponseEntity<Post> createStatus(@RequestBody Post post) {
         Post status = postService.save(post);
