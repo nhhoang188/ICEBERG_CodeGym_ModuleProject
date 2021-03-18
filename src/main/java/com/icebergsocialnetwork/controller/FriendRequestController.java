@@ -5,11 +5,12 @@ import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/friendRequess")
+@RequestMapping("/friendrequests")
 public class FriendRequestController {
     @Autowired
     private IFriendReques iFriendReques;
@@ -18,25 +19,35 @@ public class FriendRequestController {
     public Iterable<FriendRequest> getAll(){
         return iFriendReques.findAll();
     }
+
+    @GetMapping("/{id}")
+    public FriendRequest getById(@PathVariable Long id){
+        Optional<FriendRequest> check = iFriendReques.findById(id);
+        if(check.isPresent()) {
+            return check.get();
+        }
+        return null;
+    }
+
     @PostMapping
     public void create(@RequestBody FriendRequest friendRequest){
         friendRequest.setStt(false);
         iFriendReques.save(friendRequest);
     }
-    @DeleteMapping
-    public void delete(@RequestBody FriendRequest friendRequest){
-        iFriendReques.delete(friendRequest);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        iFriendReques.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    public void acceptFriend(@PathVariable Long id){
-        Optional<FriendRequest> check=iFriendReques.findById(id);
-        FriendRequest friendRequest=new FriendRequest();
-        if(check.isPresent()){
-            friendRequest= check.get();
-            friendRequest.setStt(true);
-            iFriendReques.save(friendRequest);
-        }
+    public void acceptFriend(@PathVariable Long id,@RequestBody FriendRequest friendRequest){
+        iFriendReques.save(friendRequest);
+    }
+
+    @GetMapping("/check")
+    public FriendRequest check(@RequestParam("id") Long id,@RequestParam("id2") Long id2){
+        FriendRequest friendRequest=iFriendReques.findAllByUserSender(id,id2);
+        return friendRequest;
     }
 
 }
