@@ -24,4 +24,19 @@ public class PostController {
         return responseEntity;
     }
     //endregion
+
+    //region api edit post
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Post> editPostStatus(@PathVariable("id") Long id,@RequestBody Post post) {
+        Post postEdit = postService.findById(id);
+        if (postEdit != null) {
+            postEdit.setContent(post.getContent());
+            postEdit.setCreateDate(post.getCreateDate());
+            postEdit.setPrivacy(post.getPrivacy());
+            postService.save(postEdit);
+        }
+        return new ResponseEntity<>(postEdit, HttpStatus.ACCEPTED);
+    }
+    //endregion
 }
