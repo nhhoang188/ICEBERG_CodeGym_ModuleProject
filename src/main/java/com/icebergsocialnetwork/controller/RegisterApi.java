@@ -25,4 +25,6 @@ public class RegisterApi {
     public ResponseEntity<String> admin(){
         return new ResponseEntity<>("admin", HttpStatus.OK);
     }
+
+
 }
