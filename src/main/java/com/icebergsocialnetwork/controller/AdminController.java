@@ -23,11 +23,14 @@ public class AdminController {
         return iUserService.findAll();
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/users/update/{id}")
     public ResponseEntity<User> blockUser(@RequestBody User user,
                                           @PathVariable Long id) {
     User user1 = iUserService.findById(id);
-    return new ResponseEntity<>(iUserService.save(user1), HttpStatus.OK);
+    user1.setUserStatus(user.getUserStatus());
+    iUserService.save(user1);
+    return new ResponseEntity<>(user1, HttpStatus.OK);
     }
+
 }
 
