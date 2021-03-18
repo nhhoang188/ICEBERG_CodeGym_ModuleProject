@@ -39,4 +39,12 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     //endregion
+    //region api get a post by id
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id){
+        Post post = postService.findById(id);
+        return new ResponseEntity<>(post, HttpStatus.OK);
+    }
+    //endregion
 }
