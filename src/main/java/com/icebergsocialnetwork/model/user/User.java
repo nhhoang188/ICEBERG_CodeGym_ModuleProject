@@ -16,6 +16,13 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String avatar;
+    private String imgcover;
+    private String fullname;
+    private String description;
+    private String bio;
+    private boolean accessmodifier;
+    private boolean infomodifier;
     @Column(name = "birthday")
     private Date birthDay;
     @ManyToMany(fetch = FetchType.EAGER)

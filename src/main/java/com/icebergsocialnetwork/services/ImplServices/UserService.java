@@ -92,4 +92,15 @@ public class UserService implements IUserService {
     public boolean isCorrectConfirmPassword(User user) {
         return false;
     }
+
+    @Override
+    public User findUserByIdAndInfomodifierIsTrue(Long id) {
+        User user= userRepository.findUserById(id);
+        User user1 = new User();
+        user1.setAvatar(user.getAvatar());
+        user1.setFullname(user.getFullname());
+        user1.setImgcover(user.getImgcover());
+        user1.setDescription(user.getDescription());
+        return user1;
+    }
 }
