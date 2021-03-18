@@ -20,6 +20,7 @@ public class User {
     private Date birthDay;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    private boolean blockStatus;
 
     public User() {
     }
@@ -32,6 +33,17 @@ public class User {
         this.phone = phone;
         this.birthDay = birthDay;
         this.roles = roles;
+    }
+
+    public User(Long id, String username, String password, String email, String phone, Date birthDay, Set<Role> roles, boolean blockStatus) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.birthDay = birthDay;
+        this.roles = roles;
+        this.blockStatus = blockStatus;
     }
 
     public Long getId() {
