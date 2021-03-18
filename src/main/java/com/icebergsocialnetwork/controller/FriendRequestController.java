@@ -5,6 +5,7 @@ import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +18,15 @@ public class FriendRequestController {
     @GetMapping
     public Iterable<FriendRequest> getAll(){
         return iFriendReques.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public FriendRequest getById(@PathVariable Long id){
+        Optional<FriendRequest> check = iFriendReques.findById(id);
+        if(check.isPresent()) {
+            return check.get();
+        }
+        return null;
     }
 
     @PostMapping
@@ -32,6 +42,12 @@ public class FriendRequestController {
     @PutMapping("/{id}")
     public void acceptFriend(@PathVariable Long id,@RequestBody FriendRequest friendRequest){
         iFriendReques.save(friendRequest);
+    }
+
+    @GetMapping("/check")
+    public FriendRequest check(@RequestParam("id") Long id,@RequestParam("id2") Long id2){
+        FriendRequest friendRequest=iFriendReques.findAllByUserSender(id,id2);
+        return friendRequest;
     }
 
 }

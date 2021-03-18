@@ -5,6 +5,7 @@ import com.icebergsocialnetwork.repository.like.FriendRequestRepository;
 import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FriendRequestService implements IFriendReques {
@@ -39,5 +40,10 @@ public class FriendRequestService implements IFriendReques {
     @Override
     public void delete(FriendRequest friendRequest) {
         friendRequestRepository.delete(friendRequest);
+    }
+
+    @Override
+    public FriendRequest findAllByUserSender(Long id1,Long id2) {
+        return friendRequestRepository.findAllByUserSender(id1,id2);
     }
 }
