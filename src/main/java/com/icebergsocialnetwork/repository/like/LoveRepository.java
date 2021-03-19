@@ -1,9 +1,11 @@
 package com.icebergsocialnetwork.repository.like;
 
 import com.icebergsocialnetwork.model.like.Love;
+import com.icebergsocialnetwork.model.post.Post;
+import com.icebergsocialnetwork.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LoveRepository extends JpaRepository<Love, Long> {
-    Love findLoveByPost_PostIdAndUser_Id (Long id, Long id2);
+    Love findByPostAndUser (Post post, User user);
 
 }
