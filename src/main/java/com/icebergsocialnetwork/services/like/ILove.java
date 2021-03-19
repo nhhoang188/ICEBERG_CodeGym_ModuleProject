@@ -7,6 +7,7 @@ import com.icebergsocialnetwork.services.IGenericService;
 
 public interface ILove extends IGenericService<Love> {
     Love findByPostAndUser (Post post, User user);
+    int countAllByPost(Post post);
 
 
 }

@@ -19,26 +19,40 @@ public class LoveController {
     private PostService postService;
     @Autowired
     private ILove iLove;
+
     @PostMapping
-    public void like(@RequestBody Love love){
+    public void like(@RequestBody Love love) {
         iLove.save(love);
     }
 
     @DeleteMapping("/{id}")
-    public void unlike(@PathVariable Long id){
+    public void unlike(@PathVariable Long id) {
         iLove.deleteById(id);
     }
+
     @GetMapping
-    public Iterable<Love> getAll(){
+    public Iterable<Love> getAll() {
         return iLove.findAll();
     }
+
     @GetMapping("/find")
-    public Love findByPostAndUser (@RequestParam("id1") Long id1,@RequestParam("id2") Long id2){
-        Post post= postService.findById(id1);
-        User user= iUserService.findById(id2);
-        if(post!=null && user!=null){
-            return iLove.findByPostAndUser (post,  user);
+    public Love findByPostAndUser(@RequestParam("id1") Long id1, @RequestParam("id2") Long id2) {
+        Love love;
+        Post post;
+        User user;
+        try{
+            post = postService.findById(id1);
+            user = iUserService.findById(id2);
+            love =  iLove.findByPostAndUser(post, user);
+            return love;
+        }catch (Exception e){
+            return null;
         }
-        return null;
+    }
+
+    @GetMapping("/count/{id}")
+    public int countLikeByPost(@PathVariable Long id){
+        Post post=postService.findById(id);
+        return iLove.countAllByPost(post);
     }
 }

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LoveRepository extends JpaRepository<Love, Long> {
     Love findByPostAndUser (Post post, User user);
-
+    int countAllByPost(Post post);
 }
