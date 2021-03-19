@@ -14,13 +14,16 @@ public class PostController {
     @Autowired
     private PostServiceImpl postService;
 
-    //region api status post
-    @PostMapping
-    @ResponseBody
-    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
-        Post status = postService.save(post);
-        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
-        return responseEntity;
+//    @PostMapping
+//    @ResponseBody
+//    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
+//        Post status = postService.save(post);
+//        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
+//        return responseEntity;
+//    }
+
+    @GetMapping("/posts")
+    public ResponseEntity<Iterable<Post>> getAll(){
+        return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
     }
-    //endregion
 }
