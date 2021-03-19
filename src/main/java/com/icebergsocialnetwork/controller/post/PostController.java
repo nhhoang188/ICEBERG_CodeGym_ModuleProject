@@ -14,13 +14,40 @@ public class PostController {
     @Autowired
     private PostServiceImpl postService;
 
-    //region api status post
-    @PostMapping
+//    @PostMapping
+//    @ResponseBody
+//    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
+//        Post status = postService.save(post);
+//        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
+//        return responseEntity;
+//    }
+
+    @GetMapping("/posts")
+    public ResponseEntity<Iterable<Post>> getAll(){
+        return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
+    }
+    //endregion
+
+    //region api edit post
+    @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
-        Post status = postService.save(post);
-        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
-        return responseEntity;
+    public ResponseEntity editPostStatus(@PathVariable("id") Long id, @RequestBody Post post) {
+        Post postEdit = postService.findById(id);
+        if (postEdit != null) {
+            postEdit.setContent(post.getContent());
+            postEdit.setCreateDate(post.getCreateDate());
+            postEdit.setPrivacy(post.getPrivacy());
+            postService.save(postEdit);
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+    //endregion
+    //region api get a post by id
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id){
+        Post post = postService.findById(id);
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion
 }
