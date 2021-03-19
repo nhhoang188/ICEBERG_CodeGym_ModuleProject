@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -24,7 +26,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findById(Long id) {
-        return postRepo.findById(id).get();
+        Optional<Post> postOptional = postRepo.findById(id);
+        return postOptional.orElse(null);
     }
 
     @Override
@@ -34,6 +37,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<Post> postOptional = postRepo.findById(id);
+        if (!postOptional.isPresent()) {
+            return;
+        }
         postRepo.deleteById(id);
     }
 }
