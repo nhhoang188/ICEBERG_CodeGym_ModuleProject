@@ -1,6 +1,8 @@
 package com.icebergsocialnetwork.services.like;
 
 import com.icebergsocialnetwork.model.like.Love;
+import com.icebergsocialnetwork.model.post.Post;
+import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.repository.like.LoveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +38,7 @@ public class LoveServiceImpl implements ILove{
     }
 
     @Override
-    public Love findByUser_Id(Long id) {
-        return loveRepository.findByUser_Id(id);
+    public Love findByPostAndUser (Post post, User user) {
+        return loveRepository.findByPostAndUser ( post, user);
     }
 }
