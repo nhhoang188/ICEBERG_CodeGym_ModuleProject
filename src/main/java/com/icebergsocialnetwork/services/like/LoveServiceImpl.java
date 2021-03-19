@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public class LoveServiceImpl implements ILove{
     @Autowired
     public LoveRepository loveRepository;
@@ -45,5 +47,10 @@ public class LoveServiceImpl implements ILove{
     @Override
     public int countAllByPost(Post post) {
         return loveRepository.countAllByPost(post);
+    }
+
+    @Override
+    public List<Love> findAllByPost(Post post) {
+        return loveRepository.findAllByPost(post);
     }
 }

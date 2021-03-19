@@ -9,6 +9,8 @@ import com.icebergsocialnetwork.services.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/loves")
@@ -54,5 +56,13 @@ public class LoveController {
     public int countLikeByPost(@PathVariable Long id){
         Post post=postService.findById(id);
         return iLove.countAllByPost(post);
+    }
+
+    @GetMapping("/list/{id}")
+    public List<Love> findAllByPost(@PathVariable Long id ){
+        Post post= postService.findById(id);
+        if(post!=null){
+            return iLove.findAllByPost(post);
+        }else return null;
     }
 }
