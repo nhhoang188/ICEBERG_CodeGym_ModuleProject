@@ -1,6 +1,7 @@
 package com.icebergsocialnetwork.controller.post;
 
 import com.icebergsocialnetwork.model.post.Post;
+import com.icebergsocialnetwork.services.post.PostService;
 import com.icebergsocialnetwork.services.post.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     @Autowired
-    private PostServiceImpl postService;
+    private PostService postService;
 
     //region api status post
     @PostMapping
@@ -35,14 +36,18 @@ public class PostController {
             postEdit.setPrivacy(post.getPrivacy());
             postService.save(postEdit);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
     //endregion
     //region api get a post by id
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id){
+    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id) {
         Post post = postService.findById(id);
+        if (post == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion

@@ -41,4 +41,9 @@ public class LoveServiceImpl implements ILove{
     public Love findByPostAndUser (Post post, User user) {
         return loveRepository.findByPostAndUser ( post, user);
     }
+
+    @Override
+    public int countAllByPost(Post post) {
+        return loveRepository.countAllByPost(post);
+    }
 }
