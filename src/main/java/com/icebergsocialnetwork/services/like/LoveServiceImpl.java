@@ -37,6 +37,6 @@ public class LoveServiceImpl implements ILove{
 
     @Override
     public Love findByUser_Id(Long id) {
-        return loveRepository.findByUser_Id(id);
+        return null;
     }
 }

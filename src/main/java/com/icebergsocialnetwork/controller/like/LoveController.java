@@ -24,6 +24,4 @@ public class LoveController {
     public Iterable<Love> getAll(){
         return iLove.findAll();
     }
-    @GetMapping("/{id}")
-    public Love
 }
