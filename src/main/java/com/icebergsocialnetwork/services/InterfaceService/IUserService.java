@@ -15,4 +15,8 @@ public interface IUserService extends IGenericService<User>, UserDetailsService 
 
     User findUserByIdAndInfomodifierIsTrue(Long id);
 
+    int lockUser(String username);
+
+    int unlockUser(String username);
+
 }

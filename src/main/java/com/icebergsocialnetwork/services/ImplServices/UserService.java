@@ -103,4 +103,14 @@ public class UserService implements IUserService {
         user1.setDescription(user.getDescription());
         return user1;
     }
+
+    @Override
+    public int lockUser(String username) {
+        return userRepository.lockUser(username);
+    }
+
+    @Override
+    public int unlockUser(String username) {
+        return userRepository.unlockUser(username);
+    }
 }
