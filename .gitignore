@@ -15,9 +15,9 @@ build/
 .sts4-cache
 bin/
 !**/src/main/**/bin/
-!**/src/main/resources/application.properties
 !**/src/test/**/bin/
 
+/src/main/resources/application.properties
 
 ### IntelliJ IDEA ###
 .idea
