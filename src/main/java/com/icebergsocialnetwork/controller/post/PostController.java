@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin("*")
 public class PostController {
 
     @Autowired
@@ -20,6 +21,29 @@ public class PostController {
     public ResponseEntity<Post> createStatus(@RequestBody Post post) {
         Post status = postService.save(post);
         return new ResponseEntity(status, HttpStatus.CREATED);
+    }
+    //endregion
+
+    //region api edit post
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity editPostStatus(@PathVariable("id") Long id, @RequestBody Post post) {
+        Post postEdit = postService.findById(id);
+        if (postEdit != null) {
+            postEdit.setContent(post.getContent());
+            postEdit.setCreateDate(post.getCreateDate());
+            postEdit.setPrivacy(post.getPrivacy());
+            postService.save(postEdit);
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+    //endregion
+    //region api get a post by id
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Post> findPostById(@PathVariable("id") Long id){
+        Post post = postService.findById(id);
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion
 }
