@@ -21,4 +21,8 @@ public class UserController {
     public User getById(@PathVariable Long id){
         return iUserService.findById(id);
     }
+    @GetMapping("/info/{id}")
+    public User getByIdAndInforIsPublic(@PathVariable Long id){
+        return iUserService.findUserByIdAndInfomodifierIsTrue(id);
+    }
 }
