@@ -16,9 +16,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
-/src/main/resources/application.properties
-
+src/main/resources/application.properties
+src/main/resources/local.env
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -37,4 +36,6 @@ out/
 
 ### VS Code ###
 .vscode/
+*.env
+local.env
 
