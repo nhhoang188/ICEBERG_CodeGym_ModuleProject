@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 @RequestMapping("/posts")
 @CrossOrigin("*")
@@ -52,4 +54,27 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion
+
+    //region findAllPost
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<Iterable<Post>> findAllPost() {
+        List<Post> postList = (List<Post>) postService.findAll();
+        return new ResponseEntity<>(postList, HttpStatus.OK);
+    }
+    //endregion
+
+    //region delete a status by  id
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity deleteStatusById(@PathVariable("id") Long id) {
+        Post post = postService.findById(id);
+        if (post == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        postService.deleteById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    //endregion
+
 }
