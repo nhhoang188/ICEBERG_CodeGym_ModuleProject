@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -26,7 +28,6 @@ public class PostServiceImpl implements PostService {
     public Post findById(Long id) {
         return postRepo.findById(id).get();
     }
-
     @Override
     public Post save(Post post) {
         return postRepo.save(post);
@@ -35,5 +36,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteById(Long id) {
         postRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Post> findAllByUserId(Long id) {
+        return postRepo.findAllByUserId(id);
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/posts")
@@ -26,6 +28,12 @@ public class PostController {
     @GetMapping()
     public ResponseEntity<Iterable<Post>> getAll(){
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
+    }
+
+    @GetMapping("/alo/{id}")
+    public ResponseEntity<List<Post>> getAllPostByUserId(@PathVariable Long id) {
+        List<Post> post = postService.findAllByUserId(id);
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion
 
