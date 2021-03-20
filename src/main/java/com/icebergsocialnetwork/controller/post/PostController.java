@@ -8,21 +8,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/posts")
 public class PostController {
 
     @Autowired
     private PostServiceImpl postService;
 
-//    @PostMapping
-//    @ResponseBody
-//    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
-//        Post status = postService.save(post);
-//        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
-//        return responseEntity;
-//    }
+    @PostMapping()
+    @ResponseBody
+    public ResponseEntity<Post> createStatus(@RequestBody Post post) {
+        Post status = postService.save(post);
+        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
+        return responseEntity;
+    }
 
-    @GetMapping("/posts")
+    @GetMapping()
     public ResponseEntity<Iterable<Post>> getAll(){
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
     }
@@ -50,4 +51,6 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
     //endregion
+
+
 }

@@ -22,15 +22,5 @@ public class AdminController {
     public Iterable<User> getAllUser(){
         return iUserService.findAll();
     }
-
-    @PutMapping("/users/update/{id}")
-    public ResponseEntity<User> blockUser(@RequestBody User user,
-                                          @PathVariable Long id) {
-    User user1 = iUserService.findById(id);
-    user1.setUserStatus(user.getUserStatus());
-    iUserService.save(user1);
-    return new ResponseEntity<>(user1, HttpStatus.OK);
-    }
-
 }
 
