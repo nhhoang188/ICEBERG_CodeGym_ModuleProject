@@ -46,6 +46,7 @@ public class PostController {
             postEdit.setContent(post.getContent());
             postEdit.setCreateDate(post.getCreateDate());
             postEdit.setPrivacy(post.getPrivacy());
+            postEdit.setImage(post.getImage());
             postService.save(postEdit);
         }
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
