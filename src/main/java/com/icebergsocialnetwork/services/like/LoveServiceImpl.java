@@ -1,5 +1,6 @@
 package com.icebergsocialnetwork.services.like;
 
+import com.icebergsocialnetwork.model.like.FriendRequest;
 import com.icebergsocialnetwork.model.like.Love;
 import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
@@ -53,4 +54,6 @@ public class LoveServiceImpl implements ILove{
     public List<Love> findAllByPost(Post post) {
         return loveRepository.findAllByPost(post);
     }
+
+
 }

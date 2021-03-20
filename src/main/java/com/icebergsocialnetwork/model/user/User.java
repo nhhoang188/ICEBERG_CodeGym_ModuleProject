@@ -117,4 +117,72 @@ public class User {
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getImgcover() {
+        return imgcover;
+    }
+
+    public void setImgcover(String imgcover) {
+        this.imgcover = imgcover;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public boolean isAccessmodifier() {
+        return accessmodifier;
+    }
+
+    public void setAccessmodifier(boolean accessmodifier) {
+        this.accessmodifier = accessmodifier;
+    }
+
+    public boolean isInfomodifier() {
+        return infomodifier;
+    }
+
+    public void setInfomodifier(boolean infomodifier) {
+        this.infomodifier = infomodifier;
+    }
+
+    public boolean isUserStatus() {
+        return userStatus;
+    }
 }
