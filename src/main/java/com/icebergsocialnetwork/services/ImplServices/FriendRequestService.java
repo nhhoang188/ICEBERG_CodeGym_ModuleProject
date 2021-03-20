@@ -1,6 +1,7 @@
 package com.icebergsocialnetwork.services.ImplServices;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
+import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.repository.like.FriendRequestRepository;
 import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,6 @@ public class FriendRequestService implements IFriendReques {
     @Autowired
     private FriendRequestRepository friendRequestRepository;
 
-//    @Override
-//    public Page<FriendRequest> findAll(Pageable pageable) {
-//        return friendRequestRepository.findAll(pageable);
-//    }
-//
     @Override
     public Iterable<FriendRequest> findAll() {
         return friendRequestRepository.findAll();
@@ -45,5 +41,15 @@ public class FriendRequestService implements IFriendReques {
     @Override
     public FriendRequest findAllByUserSender(Long id1,Long id2) {
         return friendRequestRepository.findAllByUserSender(id1,id2);
+    }
+    @Override
+    public List<FriendRequest> findAllByUserReceiverOrUserSender(User user1, User user2) {
+        List<FriendRequest> list= friendRequestRepository.findAllByUserReceiverOrUserSender(user1,user2);
+        int size= list.size();
+        for (int j = size-1; j >=0; j--) {
+            if (!list.get(j).isStt()) {
+                list.remove(list.get(j));
+            }
+        } return list;
     }
 }
