@@ -36,7 +36,8 @@ public class LoginApi {
 
         String jwt = jwtService.generateAccessToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        User currentUser = userService.findByUsername(user.getUsername());
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId() , userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
     @GetMapping("/hello")

@@ -1,15 +1,24 @@
 package com.icebergsocialnetwork.services.InterfaceService;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
+import com.icebergsocialnetwork.model.user.User;
+
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IFriendReques  {
+public interface IFriendReques {
     void delete(FriendRequest friendRequest);
-    public Iterable<FriendRequest> findAll();
-    public FriendRequest save(FriendRequest friendRequest);
-    public Optional<FriendRequest> findById(Long id);
-    public void deleteById(Long id);
-    public FriendRequest findAllByUserSender(Long id1,Long id2);
+
+    Iterable<FriendRequest> findAll();
+
+    FriendRequest save(FriendRequest friendRequest);
+
+    Optional<FriendRequest> findById(Long id);
+
+    void deleteById(Long id);
+
+    FriendRequest findAllByUserSender(Long id1, Long id2);
+
+    public List<FriendRequest> findAllByUserReceiverOrUserSender(User user1, User user2);
 }

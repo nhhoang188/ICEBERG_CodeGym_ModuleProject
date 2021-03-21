@@ -16,6 +16,7 @@ public class Post {
     private Date createDate;
     private String privacy;
     private String content;
+    private String image;
 
     public Post(Long postId, Long userId, Date createDate, String privacy, String content) {
         this.postId = postId;
@@ -26,6 +27,15 @@ public class Post {
     }
 
     public Post() {
+    }
+
+    public Post(Long postId, Long userId, Date createDate, String privacy, String content, String image) {
+        this.postId = postId;
+        this.userId = userId;
+        this.createDate = createDate;
+        this.privacy = privacy;
+        this.content = content;
+        this.image = image;
     }
 
     public String getPrivacy() {
@@ -68,4 +78,10 @@ public class Post {
         this.createDate = createDate;
     }
 
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
