@@ -21,8 +21,7 @@ public class PostController {
     @ResponseBody
     public ResponseEntity<Post> createStatus(@RequestBody Post post) {
         Post status = postService.save(post);
-        ResponseEntity responseEntity = new ResponseEntity(status, HttpStatus.CREATED);
-        return responseEntity;
+        return new ResponseEntity(status, HttpStatus.CREATED);
     }
     //endregion
 

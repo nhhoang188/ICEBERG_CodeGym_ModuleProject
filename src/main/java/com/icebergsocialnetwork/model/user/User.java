@@ -16,10 +16,19 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String address;
+    private String avatar;
+    private String imgcover;
+    private String fullname;
+    private String description;
+    private String bio;
+    private boolean accessmodifier;
+    private boolean infomodifier;
     @Column(name = "birthday")
     private Date birthDay;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    private boolean userStatus;
 
     public User() {
     }
@@ -32,6 +41,17 @@ public class User {
         this.phone = phone;
         this.birthDay = birthDay;
         this.roles = roles;
+    }
+
+    public User(Long id, String username, String password, String email, String phone, Date birthDay, Set<Role> roles, boolean userStatus) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.birthDay = birthDay;
+        this.roles = roles;
+        this.userStatus = userStatus;
     }
 
     public Long getId() {
@@ -88,5 +108,81 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(boolean userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getImgcover() {
+        return imgcover;
+    }
+
+    public void setImgcover(String imgcover) {
+        this.imgcover = imgcover;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public boolean isAccessmodifier() {
+        return accessmodifier;
+    }
+
+    public void setAccessmodifier(boolean accessmodifier) {
+        this.accessmodifier = accessmodifier;
+    }
+
+    public boolean isInfomodifier() {
+        return infomodifier;
+    }
+
+    public void setInfomodifier(boolean infomodifier) {
+        this.infomodifier = infomodifier;
+    }
+
+    public boolean isUserStatus() {
+        return userStatus;
     }
 }

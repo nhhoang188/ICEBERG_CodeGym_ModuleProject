@@ -15,7 +15,11 @@ public class RegisterApi {
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+        boolean isRegisted = userService.isRegister(user);
+        if (isRegisted){
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+       return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
     @GetMapping("/register")
     public ResponseEntity<String> admin(){
