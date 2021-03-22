@@ -4,9 +4,7 @@ import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.services.ImplServices.UserService;
 import com.icebergsocialnetwork.services.post.PostService;
-import com.icebergsocialnetwork.services.post.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -42,6 +40,7 @@ public class PostController {
             postEdit.setContent(post.getContent());
             postEdit.setCreateDate(post.getCreateDate());
             postEdit.setPrivacy(post.getPrivacy());
+            postEdit.setImage(post.getImage());
             postService.save(postEdit);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -67,6 +66,16 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(getAll, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Post> deletePostById(@PathVariable("id") Long id){
+        Post post = postService.findById(id);
+        if (post != null){
+            postService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
