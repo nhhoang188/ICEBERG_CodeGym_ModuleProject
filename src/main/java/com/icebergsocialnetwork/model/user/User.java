@@ -3,7 +3,11 @@ package com.icebergsocialnetwork.model.user;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -12,8 +16,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String username;
+    @Size(min=6,max=100)
     private String password;
+    @Email
     private String email;
     private String phone;
     private String address;
@@ -29,6 +36,9 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     private boolean userStatus;
+
+    @OneToMany(targetEntity = User.class)
+    private List<User> listFriend;
 
     public User() {
     }

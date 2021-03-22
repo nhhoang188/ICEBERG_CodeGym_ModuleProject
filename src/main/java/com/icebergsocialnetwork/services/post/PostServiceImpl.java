@@ -43,4 +43,9 @@ public class PostServiceImpl implements PostService {
         }
         postRepo.deleteById(id);
     }
+
+    @Override
+    public Page<Post> findPostByUserIdOrderByCreateDateDesc(Long id, Pageable pageable) {
+        return postRepo.findPostByUserIdOrderByCreateDateDesc(id, pageable);
+    }
 }
