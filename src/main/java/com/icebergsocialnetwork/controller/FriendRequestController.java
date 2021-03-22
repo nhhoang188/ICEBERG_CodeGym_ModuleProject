@@ -48,25 +48,21 @@ public class FriendRequestController {
     }
 
     @GetMapping("/check")
-    public FriendRequest check(@RequestParam("id") Long id, @RequestParam("id2") Long id2) {
+    public FriendRequest checkFriend(@RequestParam("id") Long id, @RequestParam("id2") Long id2) {
         return iFriendReques.findAllByUserSender(id, id2);
     }
 
     @GetMapping("/listfriend/{id}")
     public List<User> showListFriend(@PathVariable Long id){
         User user =iUserService.findById(id);
-        List<User> userList=new ArrayList<>();
-        if(user!=null){
-            List<FriendRequest> list= iFriendReques.findAllByUserReceiverOrUserSender(user,user);
-            for (FriendRequest friend: list) {
-                if(friend.getUserReceiver()==user){
-                    userList.add(friend.getUserSender());
-                }else {
-                    userList.add(friend.getUserReceiver());
-                }
-            }
-            return userList;
-        } return null;
+        return iFriendReques.findListFriendbyUser(user);
+    }
+
+    @GetMapping("/listsimilarfriend/{id1}/{id2}")
+    public List<User> findAllSimilarFriend(@PathVariable Long id1, @PathVariable Long id2){
+        User user1= iUserService.findById(id1);
+        User user2= iUserService.findById(id2);
+        return iFriendReques.findAllSimilarFriend(user1,user2);
     }
 
 }

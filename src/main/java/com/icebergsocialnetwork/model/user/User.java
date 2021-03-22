@@ -37,8 +37,8 @@ public class User {
     private Set<Role> roles;
     private boolean userStatus;
 
-    @OneToMany(targetEntity = User.class)
-    private List<User> listFriend;
+//    @OneToMany(targetEntity = User.class)
+//    private List<User> listFriend;
 
     public User() {
     }

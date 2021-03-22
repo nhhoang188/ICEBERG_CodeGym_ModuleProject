@@ -6,6 +6,7 @@ import com.icebergsocialnetwork.repository.like.FriendRequestRepository;
 import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,5 +52,34 @@ public class FriendRequestService implements IFriendReques {
                 list.remove(list.get(j));
             }
         } return list;
+    }
+    @Override
+    public List<User> findAllSimilarFriend(User user1, User user2){
+        List<User> userList=new ArrayList<>();
+        List<User> userListFriend1=findListFriendbyUser(user1);
+        List<User> userListFriend2=findListFriendbyUser(user2);
+        for (User friend1: userListFriend1) {
+            for (User friend2 : userListFriend2) {
+                if(friend1==friend2){
+                    userList.add(friend1);
+                }
+            }
+        }
+        return userList;
+    }
+    @Override
+    public List<User> findListFriendbyUser(User user){
+        List<User> userList=new ArrayList<>();
+        if(user!=null){
+            List<FriendRequest> list= findAllByUserReceiverOrUserSender(user,user);
+            for (FriendRequest friend: list) {
+                if(friend.getUserReceiver()==user){
+                    userList.add(friend.getUserSender());
+                }else {
+                    userList.add(friend.getUserReceiver());
+                }
+            }
+            return userList;
+        } return null;
     }
 }
