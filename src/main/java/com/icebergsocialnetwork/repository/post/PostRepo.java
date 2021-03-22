@@ -7,4 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
+
+    Page<Post> findPostByUserIdOrderByCreateDateDesc(Long id, Pageable pageable);
 }
