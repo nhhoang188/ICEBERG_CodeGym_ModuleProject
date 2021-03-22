@@ -55,11 +55,13 @@ public class PostController {
     }
     //endregion
 
-    //region findAllPost
+    //region findAllPostByUserId
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Iterable<Post>> findAllPost() {
-        List<Post> postList = (List<Post>) postService.findAll();
+    public ResponseEntity<Iterable<Post>> findAllPostByUserId() {
+        //fake userId = 1;
+        Long userId = 1L;
+        List<Post> postList = (List<Post>) postService.findAllPostByUserId(userId);
         return new ResponseEntity<>(postList, HttpStatus.OK);
     }
     //endregion
