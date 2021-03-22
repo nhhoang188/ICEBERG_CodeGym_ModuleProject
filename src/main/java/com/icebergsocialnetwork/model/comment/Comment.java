@@ -11,7 +11,9 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
+    // đây là id user của người comment
     private Long userId;
+    // đây là post id của người post bài
     private Long postId;
     private String content;
     private Date createDate;

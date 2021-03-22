@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface PostService extends IGenericService<Post> {
     Page<Post> findPostByUserIdOrderByCreateDateDesc(Long id, Pageable pageable);
+    Post findPostByPostId(Long postId);
 }

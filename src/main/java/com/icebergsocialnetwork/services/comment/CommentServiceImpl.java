@@ -1,18 +1,24 @@
 package com.icebergsocialnetwork.services.comment;
 
 import com.icebergsocialnetwork.model.comment.Comment;
+import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.repository.comment.CommentRepo;
 import com.icebergsocialnetwork.repository.like.FriendRequestRepository;
+import com.icebergsocialnetwork.repository.post.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentRepo commentRepo;
     @Autowired
     private FriendRequestRepository friendRequestRepository;
+    @Autowired
+    private PostRepo postRepo;
 
     @Override
     public Page<Comment> findAll(Pageable pageable) {
@@ -31,18 +37,23 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment save(Comment comment) {
+        Long userOwnerId = postRepo.findPostByPostId(comment.getPostId()).getUserId();
+        boolean status = checkFriend(userOwnerId, comment.getUserId());
 
-        boolean status = checkFriend(, comment.getUserId());
-
+        if (status) {
+            commentRepo.save(comment);
+            return comment;
+        }
         return null;
     }
 
     private boolean checkFriend(Long id1, Long id2) {
-        friendRequestRepository.findAllByUserSender(id1, id2);
+        return friendRequestRepository.findAllByUserSender(id1, id2).isStt();
     }
 
     @Override
     public void deleteById(Long id) {
 
     }
+
 }
