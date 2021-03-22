@@ -1,5 +1,6 @@
 package com.icebergsocialnetwork.services.like;
 
+import com.icebergsocialnetwork.model.like.FriendRequest;
 import com.icebergsocialnetwork.model.like.Love;
 import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
@@ -7,6 +8,8 @@ import com.icebergsocialnetwork.repository.like.LoveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public class LoveServiceImpl implements ILove{
     @Autowired
@@ -41,4 +44,16 @@ public class LoveServiceImpl implements ILove{
     public Love findByPostAndUser (Post post, User user) {
         return loveRepository.findByPostAndUser ( post, user);
     }
+
+    @Override
+    public int countAllByPost(Post post) {
+        return loveRepository.countAllByPost(post);
+    }
+
+    @Override
+    public List<Love> findAllByPost(Post post) {
+        return loveRepository.findAllByPost(post);
+    }
+
+
 }

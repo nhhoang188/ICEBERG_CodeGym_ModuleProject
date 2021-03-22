@@ -19,5 +19,11 @@ public class JwtResponse {
         this.username = username;
         this.roles = roles;
     }
+    public JwtResponse(String accessToken, Long id, String username, Collection<? extends GrantedAuthority> roles) {
+        this.token = accessToken;
+        this.username = username;
+        this.roles = roles;
+        this.id = id;
+    }
 
 }

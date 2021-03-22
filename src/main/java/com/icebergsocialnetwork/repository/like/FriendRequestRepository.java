@@ -1,6 +1,8 @@
 package com.icebergsocialnetwork.repository.like;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
+import com.icebergsocialnetwork.model.user.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +17,5 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
     FriendRequest findAllByUserSender (Long id1,Long id2);
 
 
-
-
+    List<FriendRequest> findAllByUserReceiverOrUserSender(User user1, User user2);
 }

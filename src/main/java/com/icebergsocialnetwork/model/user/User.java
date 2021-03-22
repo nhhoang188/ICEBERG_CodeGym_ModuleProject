@@ -3,7 +3,11 @@ package com.icebergsocialnetwork.model.user;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -12,15 +16,29 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String username;
+    @Size(min=6,max=100)
     private String password;
+    @Email
     private String email;
     private String phone;
+    private String address;
+    private String avatar;
+    private String imgcover;
+    private String fullname;
+    private String description;
+    private String bio;
+    private boolean accessmodifier;
+    private boolean infomodifier;
     @Column(name = "birthday")
     private Date birthDay;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     private boolean userStatus;
+
+    @OneToMany(targetEntity = User.class)
+    private List<User> listFriend;
 
     public User() {
     }
@@ -108,5 +126,73 @@ public class User {
 
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getImgcover() {
+        return imgcover;
+    }
+
+    public void setImgcover(String imgcover) {
+        this.imgcover = imgcover;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public boolean isAccessmodifier() {
+        return accessmodifier;
+    }
+
+    public void setAccessmodifier(boolean accessmodifier) {
+        this.accessmodifier = accessmodifier;
+    }
+
+    public boolean isInfomodifier() {
+        return infomodifier;
+    }
+
+    public void setInfomodifier(boolean infomodifier) {
+        this.infomodifier = infomodifier;
+    }
+
+    public boolean isUserStatus() {
+        return userStatus;
     }
 }
