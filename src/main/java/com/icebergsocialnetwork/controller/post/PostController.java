@@ -29,12 +29,6 @@ public class PostController {
         Post status = postService.save(post);
         return new ResponseEntity(status, HttpStatus.CREATED);
     }
-
-    @GetMapping("/alo/{id}")
-    public ResponseEntity<List<Post>> getAllPostByUserId(@PathVariable Long id) {
-        List<Post> post = postService.findAllByUserId(id);
-        return new ResponseEntity<>(post, HttpStatus.OK);
-    }
     //endregion
 
     //region api edit post
