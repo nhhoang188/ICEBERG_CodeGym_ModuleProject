@@ -26,4 +26,5 @@ public class UserController {
     public User getByIdAndInforIsPublic(@PathVariable Long id){
         return iUserService.findUserByIdAndInfomodifierIsTrue(id);
     }
+
 }
