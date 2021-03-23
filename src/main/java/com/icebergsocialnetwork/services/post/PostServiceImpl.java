@@ -15,7 +15,6 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
-
     @Autowired
     private LoveRepository loveRepository;
 
@@ -54,7 +53,6 @@ public class PostServiceImpl implements PostService {
     public Page<Post> findPostByUserIdOrderByCreateDateDesc(Long id, Pageable pageable) {
         return postRepo.findPostByUserIdOrderByCreateDateDesc(id, pageable);
     }
-
     @Override
     public Post findPostByPostId(Long postId) {
         return postRepo.findPostByPostId(postId);

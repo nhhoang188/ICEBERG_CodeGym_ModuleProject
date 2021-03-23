@@ -3,6 +3,8 @@ package com.icebergsocialnetwork;
 import com.icebergsocialnetwork.services.ImplServices.FriendRequestService;
 import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import com.icebergsocialnetwork.services.like.ILove;
+import com.icebergsocialnetwork.services.like.ILoveComment;
+import com.icebergsocialnetwork.services.like.LoveCommentServiceImpl;
 import com.icebergsocialnetwork.services.like.LoveServiceImpl;
 import com.icebergsocialnetwork.services.post.PostService;
 import com.icebergsocialnetwork.services.post.PostServiceImpl;
@@ -24,6 +26,15 @@ public class IcebergSocialnetworkApplication {
     public ILove iLove(){
         return new LoveServiceImpl();
     }
+    @Bean
+    public ILoveComment iLoveComment(){
+        return new LoveCommentServiceImpl();
+    }
+
+//    @Bean
+//    public PostService postService(){
+//        return new PostServiceImpl();
+//    }
 
     @Bean
     public PostService postService(){

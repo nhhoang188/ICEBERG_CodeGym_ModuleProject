@@ -19,10 +19,20 @@ public class CommentController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment){
-       Comment cm = commentService.save(comment);
-       if(cm != null){
-           return new ResponseEntity<>(HttpStatus.CREATED);
-       }
-       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Comment cm = commentService.save(comment);
+        if(cm != null){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Comment> findById(@PathVariable Long id){
+        Comment comment= commentService.findById(id);
+        if(comment != null){
+            return new ResponseEntity<>(comment,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
