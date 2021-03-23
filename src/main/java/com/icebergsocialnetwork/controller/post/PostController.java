@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -69,6 +70,32 @@ public class PostController {
         }
         return new ResponseEntity<>(getAll, HttpStatus.OK);
     }
+
+    @GetMapping("/test/{userId}")
+    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId){
+        List<Post> listPostUser = postService.findPostByUserId(userId);
+        List<Post> listPublicPost = new ArrayList<>();
+        for (Post post: listPostUser){
+            if(post.getPrivacy().equals("Public")){
+                listPublicPost.add(post);
+            }
+        }
+        return listPublicPost;
+    }
+
+    @GetMapping("/testfriend/{userId}")
+    public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId) {
+        List<Post> listPostUser = postService.findPostByUserId(userId);
+        List<Post> listFriendPost = new ArrayList<>();
+        for (Post post: listPostUser) {
+            if (!post.getPrivacy().equals("Private")) {
+                listFriendPost.add(post);
+            }
+        }
+        return listFriendPost;
+    }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Post> deletePostById(@PathVariable("id") Long id){
