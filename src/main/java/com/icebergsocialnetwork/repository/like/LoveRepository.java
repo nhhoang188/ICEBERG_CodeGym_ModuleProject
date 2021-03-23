@@ -12,4 +12,5 @@ public interface LoveRepository extends JpaRepository<Love, Long> {
     int countAllByPost(Post post);
 
     List<Love> findAllByPost(Post post);
+    void deleteByUserId(Long userId);
 }

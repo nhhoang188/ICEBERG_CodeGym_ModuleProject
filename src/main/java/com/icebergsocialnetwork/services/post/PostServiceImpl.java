@@ -1,7 +1,9 @@
 package com.icebergsocialnetwork.services.post;
 
 import com.icebergsocialnetwork.model.post.Post;
+import com.icebergsocialnetwork.repository.like.LoveRepository;
 import com.icebergsocialnetwork.repository.post.PostRepo;
+import com.icebergsocialnetwork.services.like.ILove;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,8 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
+    @Autowired
+    private ILove iLove;
 
     @Override
     public Page<Post> findAll(Pageable pageable) {
@@ -41,6 +45,7 @@ public class PostServiceImpl implements PostService {
         if (!postOptional.isPresent()) {
             return;
         }
+        iLove.deleteByUserId(postOptional.get().getUserId());
         postRepo.deleteById(id);
     }
 
