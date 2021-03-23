@@ -14,5 +14,5 @@ public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
 
     Post findPostByPostId(Long postId);
 
-    List<Post> findPostByUserIdPublicPrivacy(Long userId);
+    List<Post> findPostByUserId(Long userId);
 }
