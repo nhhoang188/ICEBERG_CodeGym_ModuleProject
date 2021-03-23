@@ -45,6 +45,16 @@ public class UserService implements IUserService {
     @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getAvatar() == null) {
+            user.setAvatar("assets/images/profile/profile-1.jpg");
+        } else {
+            user.setAvatar(user.getAvatar());
+        }
+        if (user.getImgcover() == null) {
+            user.setImgcover("assets/images/photos/photo-4.jpg");
+        } else {
+            user.setImgcover(user.getImgcover());
+        }
         if (user.getRoles() == null) {
             Role role = roleService.findByName("ROLE_USER");
             Set<Role> roles = new HashSet<>();
@@ -95,7 +105,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findUserByIdAndInfomodifierIsTrue(Long id) {
-        User user= userRepository.findUserById(id);
+        User user = userRepository.findUserById(id);
         User user1 = new User();
         user1.setAvatar(user.getAvatar());
         user1.setFullname(user.getFullname());
