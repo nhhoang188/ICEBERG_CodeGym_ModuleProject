@@ -8,15 +8,12 @@ import com.icebergsocialnetwork.repository.like.LoveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class LoveServiceImpl implements ILove {
+public class LoveServiceImpl implements ILove{
     @Autowired
     public LoveRepository loveRepository;
-
     @Override
     public Page<Love> findAll(Pageable pageable) {
         return null;
@@ -59,8 +56,9 @@ public class LoveServiceImpl implements ILove {
     }
 
     @Override
-    public void deleteByUserId(Long userId) {
-        loveRepository.deleteByUserId(userId);
+    public void deleteLoveByPostid(Long id) {
+        loveRepository.deleteLoveByPostid(id);
     }
+
 
 }

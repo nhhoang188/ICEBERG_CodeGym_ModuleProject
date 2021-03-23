@@ -15,8 +15,9 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
+
     @Autowired
-    private ILove iLove;
+    private LoveRepository loveRepository;
 
     @Override
     public Page<Post> findAll(Pageable pageable) {
@@ -45,7 +46,7 @@ public class PostServiceImpl implements PostService {
         if (!postOptional.isPresent()) {
             return;
         }
-        iLove.deleteByUserId(postOptional.get().getUserId());
+        loveRepository.deleteLoveByPostid(postOptional.get().getPostId());
         postRepo.deleteById(id);
     }
 
