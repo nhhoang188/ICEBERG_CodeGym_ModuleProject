@@ -36,4 +36,9 @@ public class IcebergSocialnetworkApplication {
 //        return new PostServiceImpl();
 //    }
 
+    @Bean
+    public PostService postService(){
+        return new PostServiceImpl();
+    }
+
 }

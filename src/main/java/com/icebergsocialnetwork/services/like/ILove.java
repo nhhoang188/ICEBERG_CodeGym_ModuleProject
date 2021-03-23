@@ -12,6 +12,6 @@ public interface ILove extends IGenericService<Love> {
     Love findByPostAndUser (Post post, User user);
     int countAllByPost(Post post);
     List<Love> findAllByPost(Post post);
-
+    void deleteByUserId(Long userId);
 
 }

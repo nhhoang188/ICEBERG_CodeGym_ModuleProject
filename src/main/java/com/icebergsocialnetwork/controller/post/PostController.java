@@ -78,6 +78,20 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/image/{id}")
+    @ResponseBody
+    public ResponseEntity<Post> editImagePostStatus(@PathVariable("id") Long id, @RequestBody Post post) {
+        Post postEdit = postService.findById(id);
+        if (postEdit != null) {
+            postEdit.setContent(post.getContent());
+            postEdit.setCreateDate(post.getCreateDate());
+            postEdit.setPrivacy(post.getPrivacy());
+            postEdit.setImage(null);
+            postService.save(postEdit);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     //endregion
 }
