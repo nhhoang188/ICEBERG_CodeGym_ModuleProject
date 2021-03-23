@@ -55,5 +55,10 @@ public class LoveServiceImpl implements ILove{
         return loveRepository.findAllByPost(post);
     }
 
+    @Override
+    public void deleteLoveByPostid(Long id) {
+        loveRepository.deleteLoveByPostid(id);
+    }
+
 
 }
