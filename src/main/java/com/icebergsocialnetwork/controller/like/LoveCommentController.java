@@ -37,7 +37,7 @@ public class LoveCommentController {
     }
 
     @GetMapping("/find")
-    public boolean checkByCommentAndUser(@RequestParam("id1") Long id1, @RequestParam("id2") Long id2) {
+    public LoveComment checkByCommentAndUser(@RequestParam("id1") Long id1, @RequestParam("id2") Long id2) {
         LoveComment love;
         Comment comment;
         User user;
@@ -45,10 +45,9 @@ public class LoveCommentController {
             comment = commentService.findById(id1);
             user = iUserService.findById(id2);
             love =  iLoveComment.findByCommentAndUser(comment, user);
-            return true;
+            return love;
         }catch (Exception e){
-            love= null;
-            return false;
+            return null;
         }
     }
 
