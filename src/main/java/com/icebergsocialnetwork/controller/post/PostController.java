@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -67,6 +68,23 @@ public class PostController {
         }
         return new ResponseEntity<>(getAll, HttpStatus.OK);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId){
+        User user = userService.findById(userId);
+        List<Post> listPostUser = postService.findPostByUserIdPublicPrivacy(userId);
+        List<Post> listPublicPost = new ArrayList<>();
+        for (Post post: listPostUser){
+            if(post.getPrivacy().equals("Public")){
+                listPublicPost.add(post);
+            }
+        }
+        return listPublicPost;
+
+
+    }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Post> deletePostById(@PathVariable("id") Long id){

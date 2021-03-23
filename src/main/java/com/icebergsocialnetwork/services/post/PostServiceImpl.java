@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,5 +59,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findPostByPostId(Long postId) {
         return postRepo.findPostByPostId(postId);
+    }
+
+    @Override
+    public List<Post> findPostByUserIdPublicPrivacy(Long userId) {
+        return postRepo.findPostByUserIdPublicPrivacy(userId);
     }
 }
