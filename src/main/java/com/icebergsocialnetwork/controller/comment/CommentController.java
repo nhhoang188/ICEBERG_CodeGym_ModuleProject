@@ -37,4 +37,5 @@ public class CommentController {
         List<Comment> comments = (List<Comment>) commentService.findAllCommentByPostId(postId);
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
+    //test git today
 }
