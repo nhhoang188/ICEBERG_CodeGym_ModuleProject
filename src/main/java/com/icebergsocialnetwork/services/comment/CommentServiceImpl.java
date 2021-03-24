@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -59,4 +59,9 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
+    @Override
+    public Iterable<Comment> findAllCommentByPostId(Long postId) {
+        List<Comment> comments = (List<Comment>) commentRepo.findAllCommentByPostId(postId);
+        return comments;
+    }
 }

@@ -1,5 +1,6 @@
 package com.icebergsocialnetwork.controller.comment;
 
+import com.icebergsocialnetwork.dto.ResponeMessenger;
 import com.icebergsocialnetwork.model.comment.Comment;
 import com.icebergsocialnetwork.services.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.*;
 
 @Controller
 @CrossOrigin("*")
@@ -18,21 +22,19 @@ public class CommentController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Comment> createComment(@RequestBody Comment comment){
-        Comment cm = commentService.save(comment);
-        if(cm != null){
-            return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<?> createComment(@Valid @RequestBody Comment comment) {
+        String content = comment.getContent();
+        if (content == null || content == "") {
+            return new ResponseEntity<>(new ResponeMessenger("no"),HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Comment cm = commentService.save(comment);
+        return new ResponseEntity<>(cm, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{postId}")
     @ResponseBody
-    public ResponseEntity<Comment> findById(@PathVariable Long id){
-        Comment comment= commentService.findById(id);
-        if(comment != null){
-            return new ResponseEntity<>(comment,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Comment>> findAllCommentByPostId(@PathVariable("postId") Long postId) {
+        List<Comment> comments = (List<Comment>) commentService.findAllCommentByPostId(postId);
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 }
