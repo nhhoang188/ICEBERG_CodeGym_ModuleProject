@@ -42,17 +42,23 @@ public class CommentServiceImpl implements CommentService {
     public Comment save(Comment comment) {
         Long userOwnerId = postRepo.findPostByPostId(comment.getPostId()).getUserId();
 
-        if(userOwnerId == comment.getUserId()){
+        if (userOwnerId == comment.getUserId()) {
             commentRepo.save(comment);
             return comment;
-        }else {
-            boolean status = checkFriend(userOwnerId, comment.getUserId());
-            if (status) {
-                commentRepo.save(comment);
-                return comment;
+        } else {
+            try {
+                boolean status = checkFriend(userOwnerId, comment.getUserId());
+                if (status) {
+                    commentRepo.save(comment);
+                    return comment;
+                }
+                return null;
+            } catch (Exception e) {
+                e.getMessage();
+                return null;
             }
+
         }
-        return null;
     }
 
     private boolean checkFriend(Long id1, Long id2) {

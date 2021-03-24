@@ -24,6 +24,7 @@ public class CommentController {
     @ResponseBody
     public ResponseEntity<?> createComment(@Valid @RequestBody Comment comment) {
         String content = comment.getContent();
+
         if (content == null || content == "") {
             return new ResponseEntity<>(new ResponeMessenger("no"),HttpStatus.OK);
         }
