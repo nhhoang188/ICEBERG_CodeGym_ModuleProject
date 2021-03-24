@@ -21,7 +21,11 @@ public interface IFriendReques {
     FriendRequest findAllByUserSender(Long id1, Long id2);
 
     List<FriendRequest> findAllByUserReceiverOrUserSender(User user1, User user2);
+
     List<User> findListFriendbyUser(User user);
+
     List<User> findAllSimilarFriend(User user1, User user2);
+
+    List<FriendRequest> findFriendRequestByUserReceiverAndSttIsFalse(User userReceiver);
 
 }

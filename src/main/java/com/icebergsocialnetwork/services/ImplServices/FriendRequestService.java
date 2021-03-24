@@ -67,6 +67,12 @@ public class FriendRequestService implements IFriendReques {
         }
         return userList;
     }
+
+    @Override
+    public List<FriendRequest> findFriendRequestByUserReceiverAndSttIsFalse(User userReceiver) {
+        return friendRequestRepository.findFriendRequestByUserReceiverAndSttIsFalse(userReceiver);
+    }
+
     @Override
     public List<User> findListFriendbyUser(User user){
         List<User> userList=new ArrayList<>();
