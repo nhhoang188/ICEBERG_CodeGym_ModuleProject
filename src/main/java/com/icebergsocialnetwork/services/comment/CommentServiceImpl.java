@@ -94,8 +94,14 @@ public class CommentServiceImpl implements CommentService {
         return 0;
     }
 
+
     @Override
     public List<Long> findUserId(Long commentId) {
         return commentRepo.findUserId(commentId);
+    }
+
+    @Override
+    public int updateComment(String content, Long commentId, Long postId) {
+        return commentRepo.updateComment(content, commentId, postId);
     }
 }

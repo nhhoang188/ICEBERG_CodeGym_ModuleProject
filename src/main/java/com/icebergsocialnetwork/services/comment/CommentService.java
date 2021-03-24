@@ -3,6 +3,7 @@ package com.icebergsocialnetwork.services.comment;
 import com.icebergsocialnetwork.model.comment.Comment;
 import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.services.IGenericService;
+
 import java.util.*;
 
 public interface CommentService extends IGenericService<Comment> {
@@ -13,4 +14,6 @@ public interface CommentService extends IGenericService<Comment> {
     int deleteComment(Long commentId, Long postId, Long userId);
 
     List<Long> findUserId(Long commentId);
+
+    int updateComment(String content ,Long commentId, Long postId);
 }

@@ -44,9 +44,19 @@ public class CommentController {
     public ResponseEntity deleteComment(@PathVariable("postId") Long postId,
                                         @RequestBody Comment comment) {
         int status = commentService.deleteComment(comment.getCommentId(), postId, comment.getUserId());
-        if(status == 1){
+        if (status == 1) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/{commentId}")
+    @ResponseBody
+    public ResponseEntity<Integer> updateComment(@PathVariable("commentId") Long commentId,
+                                                 @RequestBody Comment comment) {
+        int updateComment = commentService.updateComment(comment.getContent(),
+                comment.getCommentId(),
+                comment.getPostId());
+        return new ResponseEntity<>(updateComment, HttpStatus.OK);
     }
 }

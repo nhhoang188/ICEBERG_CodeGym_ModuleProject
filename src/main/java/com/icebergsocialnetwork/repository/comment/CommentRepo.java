@@ -32,4 +32,11 @@ public interface CommentRepo extends PagingAndSortingRepository<Comment, Long> {
             "from LoveComment lc " +
             "where lc.comment.commentId =?1")
     List<Long> findUserId(Long commentId);
+
+    // update comment of user through a private post
+    @Modifying
+    @Query("update Comment " +
+            "set content = ?1 " +
+            "where commentId = ?2 and postId = ?3")
+    int updateComment(String content ,Long commentId, Long postId);
 }
