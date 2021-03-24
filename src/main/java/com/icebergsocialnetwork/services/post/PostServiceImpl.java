@@ -9,13 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
-
     @Autowired
     private LoveRepository loveRepository;
 
@@ -54,9 +54,13 @@ public class PostServiceImpl implements PostService {
     public Page<Post> findPostByUserIdOrderByCreateDateDesc(Long id, Pageable pageable) {
         return postRepo.findPostByUserIdOrderByCreateDateDesc(id, pageable);
     }
-
     @Override
     public Post findPostByPostId(Long postId) {
         return postRepo.findPostByPostId(postId);
+    }
+
+    @Override
+    public List<Post> findPostByUserId(Long userId) {
+        return postRepo.findPostByUserId(userId);
     }
 }
