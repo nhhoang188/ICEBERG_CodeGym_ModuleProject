@@ -34,18 +34,23 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment findById(Long id) {
-        Optional<Comment> comment=commentRepo.findById(id);
+        Optional<Comment> comment = commentRepo.findById(id);
         return comment.orElse(null);
     }
 
     @Override
     public Comment save(Comment comment) {
         Long userOwnerId = postRepo.findPostByPostId(comment.getPostId()).getUserId();
-        boolean status = checkFriend(userOwnerId, comment.getUserId());
 
-        if (status) {
+        if(userOwnerId == comment.getUserId()){
             commentRepo.save(comment);
             return comment;
+        }else {
+            boolean status = checkFriend(userOwnerId, comment.getUserId());
+            if (status) {
+                commentRepo.save(comment);
+                return comment;
+            }
         }
         return null;
     }
