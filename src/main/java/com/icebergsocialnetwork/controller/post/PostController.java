@@ -71,7 +71,7 @@ public class PostController {
         return new ResponseEntity<>(getAll, HttpStatus.OK);
     }
 
-    @GetMapping("/test/{userId}")
+    @GetMapping("/public/{userId}")
     public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId){
         List<Post> listPostUser = postService.findPostByUserId(userId);
         List<Post> listPublicPost = new ArrayList<>();
@@ -83,7 +83,7 @@ public class PostController {
         return listPublicPost;
     }
 
-    @GetMapping("/testfriend/{userId}")
+    @GetMapping("/friend/{userId}")
     public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId) {
         List<Post> listPostUser = postService.findPostByUserId(userId);
         List<Post> listFriendPost = new ArrayList<>();
