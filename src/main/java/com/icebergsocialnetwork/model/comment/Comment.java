@@ -18,6 +18,12 @@ public class Comment {
     private String content;
     private Date createDate;
 
+    public Comment(Long commentId, Long userId, Long postId) {
+        this.commentId = commentId;
+        this.userId = userId;
+        this.postId = postId;
+    }
+
     public Comment() {
     }
 

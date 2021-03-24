@@ -75,4 +75,27 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = (List<Comment>) commentRepo.findAllCommentByPostId(postId);
         return comments;
     }
+
+    @Override
+    public int deleteLoveComment(Long commentId) {
+        int result = commentRepo.deleteLoveComment(commentId);
+        return result;
+    }
+
+    @Override
+    public int deleteComment(Long commentId, Long postId, Long userId) {
+
+        int status = deleteLoveComment(commentId);
+        if (status > 0) {
+            commentRepo.deleteComment(commentId, postId, userId);
+            return 1;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public List<Long> findUserId(Long commentId) {
+        return commentRepo.findUserId(commentId);
+    }
 }

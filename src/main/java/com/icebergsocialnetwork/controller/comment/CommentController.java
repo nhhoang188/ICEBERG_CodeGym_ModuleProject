@@ -26,7 +26,7 @@ public class CommentController {
         String content = comment.getContent();
 
         if (content == null || content == "") {
-            return new ResponseEntity<>(new ResponeMessenger("no"),HttpStatus.OK);
+            return new ResponseEntity<>(new ResponeMessenger("no"), HttpStatus.OK);
         }
         Comment cm = commentService.save(comment);
         return new ResponseEntity<>(cm, HttpStatus.CREATED);
@@ -37,5 +37,16 @@ public class CommentController {
     public ResponseEntity<List<Comment>> findAllCommentByPostId(@PathVariable("postId") Long postId) {
         List<Comment> comments = (List<Comment>) commentService.findAllCommentByPostId(postId);
         return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{postId}")
+    @ResponseBody
+    public ResponseEntity deleteComment(@PathVariable("postId") Long postId,
+                                        @RequestBody Comment comment) {
+        int status = commentService.deleteComment(comment.getCommentId(), postId, comment.getUserId());
+        if(status == 1){
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }
