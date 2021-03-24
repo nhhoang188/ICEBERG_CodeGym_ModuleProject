@@ -86,7 +86,7 @@ public class CommentServiceImpl implements CommentService {
     public int deleteComment(Long commentId, Long postId, Long userId) {
 
         int status = deleteLoveComment(commentId);
-        if (status > 0) {
+        if (status >= 0) {
             commentRepo.deleteComment(commentId, postId, userId);
             return 1;
         }
