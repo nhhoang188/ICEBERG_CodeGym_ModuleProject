@@ -26,4 +26,8 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
 
     @Query(nativeQuery = true, value = "select * from friend_request where ( (user_receiver_id=:id1 and user_sender_id=:id2 ) or(user_receiver_id=:id2 and user_sender_id=:id1 ) ) and stt is true")
     boolean checkFriendNative(Long id1, Long id2);
+
+
+    @Query(nativeQuery = true, value = "select * from friend_request where ( (user_receiver_id=:id1 and user_sender_id=:id2 ) or(user_receiver_id=:id2 and user_sender_id=:id1 ) ) and stt is false ")
+    FriendRequest checkFriendNative2(Long id1, Long id2);
 }

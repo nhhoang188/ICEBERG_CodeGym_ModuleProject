@@ -40,27 +40,30 @@ public class FriendRequestService implements IFriendReques {
     }
 
     @Override
-    public FriendRequest findAllByUserSender(Long id1,Long id2) {
-        return friendRequestRepository.findAllByUserSender(id1,id2);
+    public FriendRequest findAllByUserSender(Long id1, Long id2) {
+        return friendRequestRepository.findAllByUserSender(id1, id2);
     }
+
     @Override
     public List<FriendRequest> findAllByUserReceiverOrUserSender(User user1, User user2) {
-        List<FriendRequest> list= friendRequestRepository.findAllByUserReceiverOrUserSender(user1,user2);
-        int size= list.size();
-        for (int j = size-1; j >=0; j--) {
+        List<FriendRequest> list = friendRequestRepository.findAllByUserReceiverOrUserSender(user1, user2);
+        int size = list.size();
+        for (int j = size - 1; j >= 0; j--) {
             if (!list.get(j).isStt()) {
                 list.remove(list.get(j));
             }
-        } return list;
+        }
+        return list;
     }
+
     @Override
-    public List<User> findAllSimilarFriend(User user1, User user2){
-        List<User> userList=new ArrayList<>();
-        List<User> userListFriend1=findListFriendbyUser(user1);
-        List<User> userListFriend2=findListFriendbyUser(user2);
-        for (User friend1: userListFriend1) {
+    public List<User> findAllSimilarFriend(User user1, User user2) {
+        List<User> userList = new ArrayList<>();
+        List<User> userListFriend1 = findListFriendbyUser(user1);
+        List<User> userListFriend2 = findListFriendbyUser(user2);
+        for (User friend1 : userListFriend1) {
             for (User friend2 : userListFriend2) {
-                if(friend1==friend2){
+                if (friend1 == friend2) {
                     userList.add(friend1);
                 }
             }
@@ -84,18 +87,24 @@ public class FriendRequestService implements IFriendReques {
     }
 
     @Override
-    public List<User> findListFriendbyUser(User user){
-        List<User> userList=new ArrayList<>();
-        if(user!=null){
-            List<FriendRequest> list= findAllByUserReceiverOrUserSender(user,user);
-            for (FriendRequest friend: list) {
-                if(friend.getUserReceiver()==user){
+    public FriendRequest checkFriendNative2(Long id1, Long id2) {
+        return friendRequestRepository.checkFriendNative2(id1, id2);
+    }
+
+    @Override
+    public List<User> findListFriendbyUser(User user) {
+        List<User> userList = new ArrayList<>();
+        if (user != null) {
+            List<FriendRequest> list = findAllByUserReceiverOrUserSender(user, user);
+            for (FriendRequest friend : list) {
+                if (friend.getUserReceiver() == user) {
                     userList.add(friend.getUserSender());
-                }else {
+                } else {
                     userList.add(friend.getUserReceiver());
                 }
             }
             return userList;
-        } return null;
+        }
+        return null;
     }
 }

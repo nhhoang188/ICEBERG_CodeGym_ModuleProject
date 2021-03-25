@@ -33,10 +33,6 @@ public class PostController {
     @ResponseBody
     public ResponseEntity<Post> createStatus(@RequestBody Post post) {
         Post status = postService.save(post);
-        Notification notification = new Notification();
-        notification.setPost(post.getPostId());
-        notification.setUserId(post.getUserId());
-        notificationService.save(notification);
         return new ResponseEntity(status, HttpStatus.CREATED);
     }
     //endregion
@@ -131,7 +127,6 @@ public class PostController {
 
     @GetMapping("/timeline/{id}")
     public ResponseEntity<?> getAllPostInTimeLine(@PathVariable("id") Long id) {
-       List<Post> postList = postService.findAllPostInTimeLine(id);
         return new ResponseEntity<>(postService.findAllPostInTimeLine(id), HttpStatus.OK);
     }
     //endregion
