@@ -40,6 +40,11 @@ public class UserController {
         return new ResponseEntity<>(iUserService.save(user), HttpStatus.OK);
     }
 
+    @GetMapping("/user/know/{id}")
+    public ResponseEntity<?> userYouMayKnow(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(iUserService.userYouMayKnow(id), HttpStatus.OK);
+    }
+
     @GetMapping("/users/search")
     public List<User> findAllByFullnameContaining(@RequestParam String fullname){
         return iUserService.findAllByFullnameContaining(fullname);

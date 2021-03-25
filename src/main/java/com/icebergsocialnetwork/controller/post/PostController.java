@@ -121,6 +121,9 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @GetMapping("/timeline/{id}")
+    public ResponseEntity<?> getAllPostInTimeLine(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(postService.findAllPostInTimeLine(id), HttpStatus.OK);
+    }
     //endregion
 }

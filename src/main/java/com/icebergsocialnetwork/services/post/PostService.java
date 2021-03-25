@@ -13,4 +13,5 @@ public interface PostService extends IGenericService<Post> {
     Post findPostByPostId(Long postId);
 
     List<Post> findPostByUserId(Long userId);
+    List<Post> findAllPostInTimeLine(Long id);
 }

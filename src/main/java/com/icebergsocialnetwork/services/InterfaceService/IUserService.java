@@ -21,6 +21,8 @@ public interface IUserService extends IGenericService<User>, UserDetailsService 
 
     int unlockUser(String username);
 
+    List<User> userYouMayKnow(Long id);
+
     List<User> findAllByFullnameContaining(String fullname);
 
 
