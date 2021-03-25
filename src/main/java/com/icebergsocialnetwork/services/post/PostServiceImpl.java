@@ -78,7 +78,7 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postRepo.findAllByOrderByCreateDateDesc();
         List<Post> postList = new ArrayList<>();
         for (Post p : posts) {
-            boolean checkfr = friendReques.checkFriendNative2(user.getId(), p.getUserId()) == null;
+            boolean checkfr = friendReques.checkFriendNative2(user.getId(), p.getUserId()) != null;
             if (checkfr && !(p.getPrivacy().equals("Private"))) {
                 postList.add(p);
             }
