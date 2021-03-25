@@ -4,10 +4,16 @@ import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.services.IGenericService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 public interface IUserService extends IGenericService<User>, UserDetailsService {
     User findByUsername(String username);
 
     boolean checkLogin(User user);
+
+    boolean existsByUsername(String username);
+
+    List<User> getFriends(String username);
 
     boolean isRegister(User user);
 

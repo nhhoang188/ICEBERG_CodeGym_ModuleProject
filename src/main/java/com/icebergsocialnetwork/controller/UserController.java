@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping
@@ -36,6 +39,17 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(iUserService.save(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{username}/friend")
+    public List<User> getFriends(@PathVariable("username")String username) {
+        return iUserService.getFriends(username);
+    }
+
+    @GetMapping("/users/name/{username}")
+    public User getUser(@PathVariable("username") String username) {
+        return iUserService.findByUsername(username);
+
     }
 
 }
