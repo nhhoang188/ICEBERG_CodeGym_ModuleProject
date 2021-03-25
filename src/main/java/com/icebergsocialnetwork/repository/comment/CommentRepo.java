@@ -34,6 +34,17 @@ public interface CommentRepo extends PagingAndSortingRepository<Comment, Long> {
             "where lc.comment.commentId =?1")
     List<Long> findUserId(Long commentId);
 
+    // update comment of user through a private post
+    @Modifying
+    @Query("update Comment " +
+            "set content = ?1 " +
+            "where commentId = ?2 and postId = ?3")
+    int updateComment(String content, Long commentId, Long postId);
 
+    // find full_name of account from table user
+    @Query("select u.fullname from User u where u.id =?1")
+    String findNameUser(Long userId);
+
+    Comment findCommentByCommentId(Long commentId);
 
 }
