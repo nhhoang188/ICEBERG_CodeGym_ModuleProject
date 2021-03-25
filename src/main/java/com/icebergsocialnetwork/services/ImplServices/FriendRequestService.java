@@ -74,6 +74,16 @@ public class FriendRequestService implements IFriendReques {
     }
 
     @Override
+    public boolean checkFriend(Long id1, Long id2) {
+        return friendRequestRepository.checkFriend(id1, id2);
+    }
+
+    @Override
+    public boolean checkFriendNative(Long id1, Long id2) {
+        return friendRequestRepository.checkFriendNative(id1, id2);
+    }
+
+    @Override
     public List<User> findListFriendbyUser(User user){
         List<User> userList=new ArrayList<>();
         if(user!=null){

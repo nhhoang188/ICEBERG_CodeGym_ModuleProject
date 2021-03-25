@@ -28,4 +28,7 @@ public interface IFriendReques {
 
     List<FriendRequest> findFriendRequestByUserReceiverAndSttIsFalse(User userReceiver);
 
+    boolean checkFriend(Long id1, Long id2);
+    boolean checkFriendNative(Long id1, Long id2);
+
 }
