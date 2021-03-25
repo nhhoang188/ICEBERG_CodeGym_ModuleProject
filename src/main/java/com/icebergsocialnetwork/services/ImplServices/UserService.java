@@ -4,6 +4,7 @@ import com.icebergsocialnetwork.model.user.Role;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.model.user.UserPrinciple;
 import com.icebergsocialnetwork.repository.user.UserRepository;
+import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
 import com.icebergsocialnetwork.services.InterfaceService.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -26,6 +29,8 @@ public class UserService implements IUserService {
     PasswordEncoder passwordEncoder;
     @Autowired
     RoleService roleService;
+    @Autowired
+    IFriendReques friendReques;
 
     @Override
     public Page<User> findAll(Pageable pageable) {
@@ -122,5 +127,19 @@ public class UserService implements IUserService {
     @Override
     public int unlockUser(String username) {
         return userRepository.unlockUser(username);
+    }
+
+    @Override
+    public List<User> userYouMayKnow(Long id) {
+        User user = findById(id);
+        Iterable<User> userList = findAll();
+        List<User> userList1 = new ArrayList<>();
+        for (User u : userList) {
+            boolean checkfr = friendReques.checkFriendNative2(user.getId(), u.getId()) == null;
+            if (!checkfr && !(user.getId().equals(u.getId()))){
+                userList1.add(u);
+            }
+        }
+        return userList1;
     }
 }
