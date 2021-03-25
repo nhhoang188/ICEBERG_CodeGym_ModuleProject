@@ -11,9 +11,13 @@ public interface CommentService extends IGenericService<Comment> {
 
     int deleteLoveComment(Long commentId);
 
-    int deleteComment(Long commentId, Long postId, Long userId);
+    int deleteComment(Long commentId);
 
     List<Long> findUserId(Long commentId);
 
-    int updateComment(String content ,Long commentId, Long postId);
+    int updateComment(String content, Long commentId, Long postId);
+
+    String findNameUser(Long userId);
+
+    Comment findCommentByCommentId(Long commentId);
 }

@@ -39,11 +39,10 @@ public class CommentController {
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{postId}")
+    @DeleteMapping("/{commentId}")
     @ResponseBody
-    public ResponseEntity deleteComment(@PathVariable("postId") Long postId,
-                                        @RequestBody Comment comment) {
-        int status = commentService.deleteComment(comment.getCommentId(), postId, comment.getUserId());
+    public ResponseEntity deleteComment(@PathVariable("commentId") Long commentId) {
+        int status = commentService.deleteComment(commentId);
         if (status == 1) {
             return new ResponseEntity(HttpStatus.OK);
         }
@@ -52,11 +51,25 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     @ResponseBody
-    public ResponseEntity<Integer> updateComment(@PathVariable("commentId") Long commentId,
-                                                 @RequestBody Comment comment) {
-        int updateComment = commentService.updateComment(comment.getContent(),
-                comment.getCommentId(),
-                comment.getPostId());
-        return new ResponseEntity<>(updateComment, HttpStatus.OK);
+    public ResponseEntity<Integer> updateComment(@PathVariable("commentId") Long commentId,@RequestBody Comment comment) {
+        Comment commentOld = commentService.findCommentByCommentId(commentId);
+        if (commentOld != null) {
+            int updateComment = commentService.updateComment(comment.getContent(),
+                    comment.getCommentId(),
+                    comment.getPostId());
+            return new ResponseEntity<>(updateComment, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/{postId}/edit-comment/{commentId}")
+    @ResponseBody
+    public ResponseEntity<Comment> findCommentByCommentId(@PathVariable("postId") Long postId,
+                                                          @PathVariable("commentId") Long commentId) {
+        Comment comment = commentService.findCommentByCommentId(commentId);
+        if (comment != null) {
+            return new ResponseEntity<>(comment, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
