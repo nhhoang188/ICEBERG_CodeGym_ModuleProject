@@ -53,16 +53,16 @@ public class FriendRequestController {
     }
 
     @GetMapping("/listfriend/{id}")
-    public List<User> showListFriend(@PathVariable Long id){
-        User user =iUserService.findById(id);
+    public List<User> showListFriend(@PathVariable Long id) {
+        User user = iUserService.findById(id);
         return iFriendReques.findListFriendbyUser(user);
     }
 
     @GetMapping("/listsimilarfriend/{id1}/{id2}")
-    public List<User> findAllSimilarFriend(@PathVariable Long id1, @PathVariable Long id2){
-        User user1= iUserService.findById(id1);
-        User user2= iUserService.findById(id2);
-        return iFriendReques.findAllSimilarFriend(user1,user2);
+    public List<User> findAllSimilarFriend(@PathVariable Long id1, @PathVariable Long id2) {
+        User user1 = iUserService.findById(id1);
+        User user2 = iUserService.findById(id2);
+        return iFriendReques.findAllSimilarFriend(user1, user2);
     }
 
 }

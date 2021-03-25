@@ -8,6 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+
 @Transactional
 public interface CommentRepo extends PagingAndSortingRepository<Comment, Long> {
     Iterable<Comment> findAllCommentByPostId(Long postId);
@@ -32,4 +33,7 @@ public interface CommentRepo extends PagingAndSortingRepository<Comment, Long> {
             "from LoveComment lc " +
             "where lc.comment.commentId =?1")
     List<Long> findUserId(Long commentId);
+
+
+
 }

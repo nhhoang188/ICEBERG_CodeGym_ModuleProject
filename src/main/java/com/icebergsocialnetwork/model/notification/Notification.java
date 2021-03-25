@@ -14,6 +14,13 @@ public class Notification {
     @Column(name = "userid")
     private Long UserId;
 
-    @Column(name = "friendrequestid")
-    private Long friendRequestId;
+    @Column(name = "like_id")
+    private Long likeId;
+
+    @Column(name = "cmt_id")
+    private Long comment;
+
+    @Column(name = "post_id")
+    private Long post;
+
 }
