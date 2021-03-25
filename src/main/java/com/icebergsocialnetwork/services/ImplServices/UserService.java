@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -123,4 +124,10 @@ public class UserService implements IUserService {
     public int unlockUser(String username) {
         return userRepository.unlockUser(username);
     }
+
+    @Override
+    public List<User> findAllByFullnameContaining(String fullname){
+        return userRepository.findAllByFullnameContaining(fullname);
+    }
+
 }
