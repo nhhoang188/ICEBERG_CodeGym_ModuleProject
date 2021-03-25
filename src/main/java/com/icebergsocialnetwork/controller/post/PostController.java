@@ -1,10 +1,8 @@
 package com.icebergsocialnetwork.controller.post;
 
-import com.icebergsocialnetwork.model.notification.Notification;
 import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.services.ImplServices.UserService;
-import com.icebergsocialnetwork.services.notification.NotificationService;
 import com.icebergsocialnetwork.services.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -25,18 +23,11 @@ public class PostController {
     private PostService postService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private NotificationService notificationService;
-
     //region api status post
     @PostMapping
     @ResponseBody
     public ResponseEntity<Post> createStatus(@RequestBody Post post) {
         Post status = postService.save(post);
-        Notification notification = new Notification();
-        notification.setPost(post.getPostId());
-        notification.setUserId(post.getUserId());
-        notificationService.save(notification);
         return new ResponseEntity(status, HttpStatus.CREATED);
     }
     //endregion
@@ -71,7 +62,7 @@ public class PostController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Post>> findPostByUserId(@PathVariable("userId") Long userId, @PageableDefault Pageable pageable) {
+    public ResponseEntity<List<Post>> findPostByUserId(@PathVariable("userId") Long userId,@PageableDefault Pageable pageable) {
         User user = userService.findById(userId);
         List<Post> getAll = postService.findPostByUserIdOrderByCreateDateDesc(userId, pageable).getContent();
         if (user == null) {
@@ -81,11 +72,11 @@ public class PostController {
     }
 
     @GetMapping("/public/{userId}")
-    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId) {
-        List<Post> listPostUser = postService.findPostByUserId(userId);
+    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId,@PageableDefault Pageable pageable) {
+        List<Post> listPostUser = postService.findPostByUserIdOrderByCreateDateDesc(userId, pageable).getContent();
         List<Post> listPublicPost = new ArrayList<>();
-        for (Post post : listPostUser) {
-            if (post.getPrivacy().equals("Public")) {
+        for (Post post: listPostUser){
+            if(post.getPrivacy().equals("Public")){
                 listPublicPost.add(post);
             }
         }
@@ -93,8 +84,8 @@ public class PostController {
     }
 
     @GetMapping("/friend/{userId}")
-    public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId) {
-        List<Post> listPostUser = postService.findPostByUserId(userId);
+    public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId,@PageableDefault Pageable pageable) {
+        List<Post> listPostUser = postService.findPostByUserIdOrderByCreateDateDesc(userId, pageable).getContent();
         List<Post> listFriendPost = new ArrayList<>();
         for (Post post : listPostUser) {
             if (!post.getPrivacy().equals("Private")) {
@@ -103,6 +94,7 @@ public class PostController {
         }
         return listFriendPost;
     }
+
 
 
     @DeleteMapping("/{id}")
