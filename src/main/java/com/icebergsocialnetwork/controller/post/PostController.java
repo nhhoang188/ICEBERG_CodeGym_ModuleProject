@@ -72,8 +72,8 @@ public class PostController {
     }
 
     @GetMapping("/public/{userId}")
-    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId){
-        List<Post> listPostUser = postService.findPostByUserId(userId);
+    public List<Post> findPublicPostByUserId(@PathVariable("userId") Long userId,@PageableDefault Pageable pageable) {
+        List<Post> listPostUser = postService.findPostByUserIdOrderByCreateDateDesc(userId, pageable).getContent();
         List<Post> listPublicPost = new ArrayList<>();
         for (Post post: listPostUser){
             if(post.getPrivacy().equals("Public")){
@@ -84,8 +84,8 @@ public class PostController {
     }
 
     @GetMapping("/friend/{userId}")
-    public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId) {
-        List<Post> listPostUser = postService.findPostByUserId(userId);
+    public List<Post> findPublicAndFriendOnlyPostByUserId(@PathVariable("userId") Long userId,@PageableDefault Pageable pageable) {
+        List<Post> listPostUser = postService.findPostByUserIdOrderByCreateDateDesc(userId, pageable).getContent();
         List<Post> listFriendPost = new ArrayList<>();
         for (Post post: listPostUser) {
             if (!post.getPrivacy().equals("Private")) {
