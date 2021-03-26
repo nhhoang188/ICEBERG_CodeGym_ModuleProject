@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.List;
 import java.util.Set;
 
@@ -76,18 +77,35 @@ public class UserService implements IUserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        return UserPrinciple.build(user);
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()) {
+            return UserPrinciple.build(user.get());
+        }
+        return null;
     }
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()) {
+            return userRepository.findByUsername(username).get();
+        }
+        return null;
     }
 
     @Override
     public boolean checkLogin(User user) {
         return false;
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public List<User> getFriends(String username) {
+        return userRepository.getFriends(username);
     }
 
     @Override

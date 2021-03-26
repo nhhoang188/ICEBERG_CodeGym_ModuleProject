@@ -40,6 +40,17 @@ public class UserController {
         return new ResponseEntity<>(iUserService.save(user), HttpStatus.OK);
     }
 
+    @GetMapping("/users/{username}/friend")
+    public List<User> getFriends(@PathVariable("username")String username) {
+        return iUserService.getFriends(username);
+    }
+
+    @GetMapping("/users/name/{username}")
+    public User getUser(@PathVariable("username") String username) {
+        return iUserService.findByUsername(username);
+
+    }
+
     @GetMapping("/user/know/{id}")
     public ResponseEntity<?> userYouMayKnow(@PathVariable("id") Long id) {
         return new ResponseEntity<>(iUserService.userYouMayKnow(id), HttpStatus.OK);

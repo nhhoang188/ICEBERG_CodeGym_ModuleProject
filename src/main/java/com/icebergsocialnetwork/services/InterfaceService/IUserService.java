@@ -11,6 +11,10 @@ public interface IUserService extends IGenericService<User>, UserDetailsService 
 
     boolean checkLogin(User user);
 
+    boolean existsByUsername(String username);
+
+    List<User> getFriends(String username);
+
     boolean isRegister(User user);
 
     boolean isCorrectConfirmPassword(User user);

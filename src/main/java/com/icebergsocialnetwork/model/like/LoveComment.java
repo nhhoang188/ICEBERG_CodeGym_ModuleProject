@@ -1,7 +1,6 @@
 package com.icebergsocialnetwork.model.like;
 
 import com.icebergsocialnetwork.model.comment.Comment;
-import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
 
 import javax.persistence.*;
