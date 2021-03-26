@@ -52,12 +52,17 @@ public class UserService implements IUserService {
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getAvatar() == null) {
-            user.setAvatar("assets/images/profile/profile-1.jpg");
+            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/fir-upload-file-337b5.appspot.com/o/RoomsImages%2F1616726926965?alt=media&token=a763f7d3-43ec-4858-a292-eadec094e477");
         } else {
             user.setAvatar(user.getAvatar());
         }
+        if (user.getFullname() == null){
+            user.setFullname(user.getUsername());
+        } else {
+            user.setFullname(user.getFullname());
+        }
         if (user.getImgcover() == null) {
-            user.setImgcover("assets/images/photos/photo-4.jpg");
+            user.setImgcover("https://firebasestorage.googleapis.com/v0/b/fir-upload-file-337b5.appspot.com/o/RoomsImages%2F1616726914439?alt=media&token=dafe0595-f166-436d-857e-1389cb755b3c");
         } else {
             user.setImgcover(user.getImgcover());
         }
