@@ -136,7 +136,7 @@ public class UserService implements IUserService {
         List<User> userList1 = new ArrayList<>();
         for (User u : userList) {
             boolean checkfr = friendReques.checkFriendNative2(user.getId(), u.getId()) == null;
-            if (!checkfr && !(user.getId().equals(u.getId()))){
+            if (checkfr && !(user.getId().equals(u.getId()))){
                 userList1.add(u);
             }
         }
