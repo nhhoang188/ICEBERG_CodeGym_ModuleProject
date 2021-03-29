@@ -1,8 +1,8 @@
-package com.icebergsocialnetwork.services.ImplServices;
+package com.icebergsocialnetwork.services.user.Impl;
 
 import com.icebergsocialnetwork.model.user.Role;
 import com.icebergsocialnetwork.repository.user.RoleRepository;
-import com.icebergsocialnetwork.services.InterfaceService.IRoleService;
+import com.icebergsocialnetwork.services.user.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

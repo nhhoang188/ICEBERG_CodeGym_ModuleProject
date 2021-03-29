@@ -2,7 +2,7 @@ package com.icebergsocialnetwork.controller.post;
 
 import com.icebergsocialnetwork.model.post.Post;
 import com.icebergsocialnetwork.model.user.User;
-import com.icebergsocialnetwork.services.ImplServices.UserService;
+import com.icebergsocialnetwork.services.user.Impl.UserService;
 import com.icebergsocialnetwork.services.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

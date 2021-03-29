@@ -1,13 +1,12 @@
-package com.icebergsocialnetwork.controller;
+package com.icebergsocialnetwork.controller.friend;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
 import com.icebergsocialnetwork.model.user.User;
-import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.friend.IFriendReques;
+import com.icebergsocialnetwork.services.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

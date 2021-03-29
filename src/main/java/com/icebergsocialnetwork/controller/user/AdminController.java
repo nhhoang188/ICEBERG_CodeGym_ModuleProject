@@ -1,7 +1,7 @@
-package com.icebergsocialnetwork.controller;
+package com.icebergsocialnetwork.controller.user;
 
 import com.icebergsocialnetwork.model.user.User;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

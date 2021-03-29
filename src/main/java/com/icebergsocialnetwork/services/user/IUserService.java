@@ -1,4 +1,4 @@
-package com.icebergsocialnetwork.services.InterfaceService;
+package com.icebergsocialnetwork.services.user;
 
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.services.IGenericService;

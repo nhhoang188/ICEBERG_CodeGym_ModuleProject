@@ -1,4 +1,4 @@
-package com.icebergsocialnetwork.services.InterfaceService;
+package com.icebergsocialnetwork.services.friend;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
 import com.icebergsocialnetwork.model.user.User;

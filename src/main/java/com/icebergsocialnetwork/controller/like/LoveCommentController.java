@@ -4,7 +4,7 @@ package com.icebergsocialnetwork.controller.like;
 import com.icebergsocialnetwork.model.comment.Comment;
 import com.icebergsocialnetwork.model.like.LoveComment;
 import com.icebergsocialnetwork.model.user.User;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.user.IUserService;
 import com.icebergsocialnetwork.services.comment.CommentService;
 import com.icebergsocialnetwork.services.like.ILoveComment;
 import org.springframework.beans.factory.annotation.Autowired;

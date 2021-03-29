@@ -1,11 +1,11 @@
-package com.icebergsocialnetwork.services.ImplServices;
+package com.icebergsocialnetwork.services.user.Impl;
 
 import com.icebergsocialnetwork.model.user.Role;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.model.user.UserPrinciple;
 import com.icebergsocialnetwork.repository.user.UserRepository;
-import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.friend.IFriendReques;
+import com.icebergsocialnetwork.services.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

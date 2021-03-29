@@ -1,9 +1,9 @@
-package com.icebergsocialnetwork.services.ImplServices;
+package com.icebergsocialnetwork.services.friend;
 
 import com.icebergsocialnetwork.model.like.FriendRequest;
 import com.icebergsocialnetwork.model.user.User;
 import com.icebergsocialnetwork.repository.like.FriendRequestRepository;
-import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
+import com.icebergsocialnetwork.services.friend.IFriendReques;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

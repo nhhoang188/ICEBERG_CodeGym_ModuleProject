@@ -1,7 +1,7 @@
 package com.icebergsocialnetwork.controller.message;
 
 import com.icebergsocialnetwork.model.message.ChatRoom;
-import com.icebergsocialnetwork.services.ImplServices.UserService;
+import com.icebergsocialnetwork.services.user.Impl.UserService;
 import com.icebergsocialnetwork.services.message.ChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

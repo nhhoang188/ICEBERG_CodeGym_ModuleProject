@@ -1,17 +1,13 @@
 package com.icebergsocialnetwork.controller.notification;
 
-import com.icebergsocialnetwork.model.like.FriendRequest;
-import com.icebergsocialnetwork.model.notification.Notification;
 import com.icebergsocialnetwork.model.user.User;
-import com.icebergsocialnetwork.services.InterfaceService.IFriendReques;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.friend.IFriendReques;
+import com.icebergsocialnetwork.services.user.IUserService;
 import com.icebergsocialnetwork.services.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin("*")

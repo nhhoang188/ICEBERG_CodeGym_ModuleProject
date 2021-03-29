@@ -13,7 +13,6 @@ import java.util.Optional;
 @Transactional
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-//    User findByUsername(String username);
 
 
     List<User> findAllByFullnameContaining(String fullname);

@@ -1,6 +1,6 @@
 package com.icebergsocialnetwork.config.filter;
-import com.icebergsocialnetwork.services.ImplServices.JwtService;
-import com.icebergsocialnetwork.services.InterfaceService.IUserService;
+import com.icebergsocialnetwork.services.user.Impl.JwtService;
+import com.icebergsocialnetwork.services.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

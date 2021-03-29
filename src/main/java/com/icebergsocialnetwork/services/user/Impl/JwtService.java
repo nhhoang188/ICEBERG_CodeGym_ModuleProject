@@ -1,4 +1,4 @@
-package com.icebergsocialnetwork.services.ImplServices;
+package com.icebergsocialnetwork.services.user.Impl;
 
 import com.icebergsocialnetwork.model.user.UserPrinciple;
 import io.jsonwebtoken.*;
